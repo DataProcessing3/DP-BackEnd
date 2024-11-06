@@ -12,7 +12,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
-                .allowCredentials(true) //만일 credentialed request가 아닐 경우, allowCredentials(true) 부분을 제거
+                //.allowCredentials(true) //만일 credentialed request가 아닐 경우, allowCredentials(true) 부분을 제거
                 .maxAge(3000);
     }
 }
