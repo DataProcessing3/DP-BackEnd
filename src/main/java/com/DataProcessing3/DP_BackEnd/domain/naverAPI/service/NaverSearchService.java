@@ -1,5 +1,10 @@
 package com.DataProcessing3.DP_BackEnd.domain.naverAPI.service;
 
+
+
+import com.DataProcessing3.DP_BackEnd.domain.naverAPI.dto.BlogItem;
+import com.DataProcessing3.DP_BackEnd.domain.naverAPI.dto.CafeItem;
+import com.DataProcessing3.DP_BackEnd.domain.naverAPI.dto.NewsItem;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
@@ -8,8 +13,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -39,6 +43,7 @@ public class NaverSearchService {
         return text;
     }
 
+    //검색 결과 반환
     public List<?> search(String query, String type) {
 
 
@@ -56,6 +61,7 @@ public class NaverSearchService {
         JSONArray items = json.getJSONArray("items");
 
         switch (type) {
+                //뉴스 파트
             case "news":
                 List<NewsItem> newsResults = new ArrayList<>();
                 for (int i = 0; i < items.length(); i++) {
@@ -70,6 +76,7 @@ public class NaverSearchService {
                 }
                 return newsResults;
 
+                //블로그 파트
             case "blog":
                 List<BlogItem> blogResults = new ArrayList<>();
                 for (int i = 0; i < items.length(); i++) {
@@ -85,6 +92,7 @@ public class NaverSearchService {
                 }
                 return blogResults;
 
+                //카페 파트
             case "cafearticle":
                 List<CafeItem> cafeResults = new ArrayList<>();
                 for (int i = 0; i < items.length(); i++) {
