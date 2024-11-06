@@ -7,10 +7,7 @@ import com.DataProcessing3.DP_BackEnd.domain.koreaInvest.dto.response.ProfitDto;
 import com.DataProcessing3.DP_BackEnd.domain.koreaInvest.dto.response.TradingVolumeDto;
 import com.DataProcessing3.DP_BackEnd.domain.koreaInvest.service.KisService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -32,17 +29,17 @@ public class KisController {
     // iscd = 005930
     // during = 0
     // 손익 계산서
-    @GetMapping("/profit-loss")
-    public Mono<List<ProfitDto>> getCapitalRank(@RequestBody BasicRequestDto basicDto){
+    @GetMapping("/profit-loss/{iscd}/{during}")
+    public Mono<List<ProfitDto>> getCapitalRank(@PathVariable String iscd,@PathVariable String during){
 
-        return kisService.getProfitLoss(basicDto);
+        return kisService.getProfitLoss(iscd, during);
     }
 
     // 재무비율 API
-    @GetMapping("/financial-ratio/")
-    public Mono<List<FinancialRatioDto>> getFinancialRatio(@RequestBody BasicRequestDto basicDto){
+    @GetMapping("/financial-ratio/{iscd}/{during}")
+    public Mono<List<FinancialRatioDto>> getFinancialRatio(@PathVariable String iscd,@PathVariable String during){
 
-        return kisService.getfinancialRatio(basicDto);
+        return kisService.getfinancialRatio(iscd, during);
     }
 
     // 거래량 순위 API

@@ -60,15 +60,15 @@ public class KisService {
 
 
     // 손익계산서
-    public Mono<List<ProfitDto>> getProfitLoss(BasicRequestDto basicDto){
+    public Mono<List<ProfitDto>> getProfitLoss(String iscd, String during){
 
         HttpHeaders headers = kisUtils.createHttpHeaders(PRICE_LOSS);
 
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/uapi/domestic-stock/v1/finance/income-statement")
                         .queryParam("fid_cond_mrkt_div_code", "J")
-                        .queryParam("fid_input_iscd",basicDto.iscd())
-                        .queryParam("FID_DIV_CLS_CODE",basicDto.during()) // 0. 년 기준 1. 분기 기준
+                        .queryParam("fid_input_iscd",iscd)
+                        .queryParam("FID_DIV_CLS_CODE",during) // 0. 년 기준 1. 분기 기준
                         .build())
                 .headers(httpHeaders -> httpHeaders.addAll(headers))
                 .retrieve()
@@ -78,15 +78,15 @@ public class KisService {
 
 
     // 재무비율 API
-    public Mono<List<FinancialRatioDto>> getfinancialRatio(BasicRequestDto basicDto){
+    public Mono<List<FinancialRatioDto>> getfinancialRatio(String iscd, String during){
 
         HttpHeaders headers = kisUtils.createHttpHeaders(FINANCIAL_RATIO);
 
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/uapi/domestic-stock/v1/finance/financial-ratio")
                         .queryParam("fid_cond_mrkt_div_code", "J")
-                        .queryParam("fid_input_iscd",basicDto.iscd())
-                        .queryParam("FID_DIV_CLS_CODE",basicDto.during()) // 0. 년 기준 1. 분기 기준
+                        .queryParam("fid_input_iscd",iscd)
+                        .queryParam("FID_DIV_CLS_CODE",during) // 0. 년 기준 1. 분기 기준
                         .build())
                 .headers(httpHeaders -> httpHeaders.addAll(headers))
                 .retrieve()
