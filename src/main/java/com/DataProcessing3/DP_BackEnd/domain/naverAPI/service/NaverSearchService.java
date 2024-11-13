@@ -47,7 +47,7 @@ public class NaverSearchService {
     public List<?> search(String query, String type) {
 
 
-        String url = NAVER_API_URL + type + "?query=" + query + "&display=5";
+        String url = NAVER_API_URL + type + "?query=" + query + "&display=4";
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-Naver-Client-Id", clientId);
